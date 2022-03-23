@@ -1,4 +1,4 @@
-USE LFSemployeesDB;
+USE LFScenterDB;
 
 INSERT INTO units (unit_name)
 VALUES
