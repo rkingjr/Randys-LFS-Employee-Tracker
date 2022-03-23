@@ -25,6 +25,5 @@ CREATE TABLE workers (
     position_id INT,
     manager_id INT UNSIGNED,
     INDEX man_ind (manager_id),
-    CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES workers(worker_id) ON DELETE SET NULL,
     FOREIGN KEY (position_id) REFERENCES positions(position_id) ON DELETE SET NULL
 );
