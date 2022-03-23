@@ -2,7 +2,7 @@ const db = require('../config/connection')
 
 const getUnits = async () => {
     let units = await db.promise().query(`SELECT * FROM units`);
-    let unitsArray = units[0].map(({ unit_id, unit_id }) => ({
+    let unitsArray = units[0].map(({ unit_id, unit_name }) => ({
         name: `${unit_name}`,
         value: unit_id
     }));
