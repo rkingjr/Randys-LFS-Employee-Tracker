@@ -1,28 +1,30 @@
 DROP DATABASE IF EXISTS LFSemployeesDB;
-
 CREATE DATABASE LFSemployeesDB;
 
 USE LFSemployeesDB;
 
-CREATE TABLE departments (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(30) NULL,
-    PRIMARY KEY (id)
+CREATE TABLE units (
+    unit_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    unit_name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE roles (
-    id INT NOT_NULL AUTO_INCREMENT,
-    title VARCHAR(30) NULL,
-    salary DECIMAL(10.3) NULL,
-    departments_id INT NULL,
-    PRIMARY KEY (id)
+CREATE TABLE positions (
+    position_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    position_title VARCHAR(100) NOT NULL,
+    salary INT NOT NULL,
+    unit_id INT,
+    FOREIGN KEY (unit_id)
+    REFERENCES units(unit_id)
+    ON DELETE SET NULL
 );
 
-CREATE TABLE employees (
-    id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(30) NULL,
-    last_name VARCHAR(30) NULL,
-    roles_id INT NULL,
-    manager_id INT NULL,
-    PRIMARY KEY (id)
+CREATE TABLE workers (
+    worker_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    position_id INT,
+    manager_id INT UNSIGNED,
+    INDEX man_ind (manager_id),
+    CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES workers(worker_id) ON DELETE SET NULL,
+    FOREIGN KEY (position_id) REFERENCES positions(position_id) ON DELETE SET NULL
 );
